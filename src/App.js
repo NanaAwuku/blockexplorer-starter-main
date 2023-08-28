@@ -28,6 +28,14 @@ function App() {
     getBlockInfo();
   }, []);
 
+  const calculateTimeDifference = (timestamp) => {
+    const currentTime = new Date().getTime();
+    const transactionTime = new Date(timestamp * 1000).getTime();
+    const timeDifference = currentTime - transactionTime;
+    const minutes = Math.floor(timeDifference / (1000 * 60));
+    return `${minutes} mins ago`;
+  };
+
   const displayedTransactions = showAllTransactions
     ? blockInfo?.transactions
     : blockInfo?.transactions.slice(0, 5);
@@ -87,16 +95,25 @@ function App() {
               <div className="divide-y divide-blue-200 h-full pb-4 bg-white">
                 {displayedTransactions &&
                   displayedTransactions.map((tx, index) => (
+                    
                     <div key={index} className="py-1 px-3 bg-white">
-                      <div className="flex justify-between items-center">
+{                      console.log(tx)
+}                      <div className="flex justify-between items-center">
                         <span className="flex items-center gap-3">
                           <span className="bg-slate-200 p-2 rounded-full text-[10px]">
                             TX
                           </span>
-                          <span className="text-[12px]">
-                            {tx.hash.substring(0, 8)}...{" "}
+
+                          <span className="flex flex-col">
+                            <span className="text-[12px]">
+                              {tx.hash.substring(0, 8)}...{" "}
+                            </span>
+                            <span className="text-[12px]">
+                              {calculateTimeDifference(tx.timestamp)}
+                            </span>
                           </span>
                         </span>
+
                         <span className="flex flex-col">
                           <div>
                             <span className="text-[12px]">From:</span>
@@ -117,16 +134,16 @@ function App() {
                       </div>
                     </div>
                   ))}
-                
+
                 <span className="flex items-center justify-center">
-                {!showAllTransactions && (
-                  <button
-                    className="mt-4 py-1 px-4 bg-slate-200 rounded-md"
-                    onClick={() => setShowAllTransactions(true)}
-                  >
-                    Load All Transactions
-                  </button>
-                )}
+                  {!showAllTransactions && (
+                    <button
+                      className="mt-4 py-1 px-4 bg-slate-200 rounded-md"
+                      onClick={() => setShowAllTransactions(true)}
+                    >
+                      Load All Transactions
+                    </button>
+                  )}
                 </span>
               </div>
             </div>
