@@ -117,9 +117,6 @@ function App() {
                             <span className="text-[12px]">
                               {tx.hash.substring(0, 8)}...{" "}
                             </span>
-                            <span className="text-[12px]">
-                              {/* {calculateTimeDifference(tx.timestamp)} */}
-                            </span>
                           </span>
                         </span>
 
