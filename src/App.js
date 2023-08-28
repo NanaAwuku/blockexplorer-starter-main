@@ -10,7 +10,9 @@ const settings = {
 const alchemy = new Alchemy(settings);
 
 function App() {
+  
   const [blockInfo, setBlockInfo] = useState();
+
   const [error, setError] = useState(null);
   const [showAllTransactions, setShowAllTransactions] = useState(false);
 
@@ -49,8 +51,9 @@ function App() {
           {blockInfo && (
             <div className="mb-4">
               <h2 className="mb-2 text-1xl text-left capitalize text-blue-800">
-                Latest Block Information
+                Block
               </h2>
+              {console.log('this is information about the exct block',blockInfo)}
               <div className="bg-white h-auto p-4 divide-y divide-blue-200">
                 <div className="py-3 flex justify-between items-center">
                   <span className="text-[12px] font-semibold">
@@ -68,6 +71,12 @@ function App() {
                   <span className="text-[12px] font-semibold">Miner:</span>
                   <span className="text-[12px]">
                     {blockInfo.miner.substring(0, 40)}...
+                  </span>
+                </div>
+                <div className="py-3 flex justify-between items-center">
+                  <span className="text-[12px] font-semibold">Nonce:</span>
+                  <span className="text-[12px]">
+                    {blockInfo.nonce}
                   </span>
                 </div>
                 <div className="py-3 flex justify-between items-center">
@@ -109,7 +118,7 @@ function App() {
                               {tx.hash.substring(0, 8)}...{" "}
                             </span>
                             <span className="text-[12px]">
-                              {calculateTimeDifference(tx.timestamp)}
+                              {/* {calculateTimeDifference(tx.timestamp)} */}
                             </span>
                           </span>
                         </span>
@@ -128,8 +137,8 @@ function App() {
                             </span>
                           </div>
                         </span>
-                        <span className="text-[12px] bg-slate-200 p-1 px-2 rounded-md">
-                          {tx.value.toString().substring(0, 5)}
+                        <span className="text-[12px]  bg-slate-200 pr-1 p-1 px-2 rounded-md">
+                          {tx.value.toString().substring(0, 5)}  Matic
                         </span>
                       </div>
                     </div>
